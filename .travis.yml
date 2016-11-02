@@ -7,17 +7,25 @@ env:
     - TOX_ENV=py27-docs
     - TOX_ENV=py27-django1.7-drf3.0
     - TOX_ENV=py27-django1.7-drf3.1
+    - TOX_ENV=py27-django1.7-drf3.2
+    - TOX_ENV=py27-django1.7-drf3.3
     - TOX_ENV=py27-django1.8-drf3.0
     - TOX_ENV=py27-django1.8-drf3.1
+    - TOX_ENV=py27-django1.8-drf3.2
+    - TOX_ENV=py27-django1.8-drf3.3
+    - TOX_ENV=py27-django1.9-drf3.3
 
 matrix:
   fast_finish: true
 
 install:
+  - pip install -r requirements.txt
   - pip install tox python-coveralls
 
 script:
     - tox -e $TOX_ENV
+    - coverage run runtests.py
 
 after_success:
-  - coveralls
+  coveralls
+
